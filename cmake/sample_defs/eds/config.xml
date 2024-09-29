@@ -27,7 +27,7 @@
 -->
 <DesignParameters>
 
-  <Package name="SAMPLE_APP">
+  <Package name="BLINKER_APP">
     <Define name="STRING_VAL_LEN" value="10" />
   </Package>
 

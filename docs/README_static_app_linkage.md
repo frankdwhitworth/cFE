@@ -97,19 +97,19 @@ of the ES startup script file, _not_ the 2nd parameter.
 
 ### Example CFE mission configuration
 
-To link the "sample_app" application statically, the following two lines are 
+To link the "blinker_app" application statically, the following two lines are 
 used in `targets.cmake`:
 
-    set(TGT1_STATIC_APPLIST sample_app)
-    set(TGT1_STATIC_SYMLIST SAMPLE_AppMain,SAMPLE_APP)
+    set(TGT1_STATIC_APPLIST blinker_app)
+    set(TGT1_STATIC_SYMLIST SAMPLE_AppMain,BLINKER_APP)
 
 The `TGT1_STATIC_APPLIST` simply causes the application code to be built as a 
 static library instead of a shared library.  The `TGT1_STATIC_SYMLIST` directive 
 will generate a runtime lookup table for OSAL containing the address of the 
 `SAMPLE_AppMain` symbol that is defined in a "virtual" module called 
-`SAMPLE_APP`.  The effect of this second line is two fold:
+`BLINKER_APP`.  The effect of this second line is two fold:
 
-- A call to `OS_ModuleLoad()` with the name `SAMPLE_APP` always returns 
+- A call to `OS_ModuleLoad()` with the name `BLINKER_APP` always returns 
 successfully without doing any loading, because it is assumed the module is 
 statically linked, and therefore already effectively loaded into memory.
 - A call to `OS_SymbolLookup()` with the name `SAMPLE_AppMain` will return the 

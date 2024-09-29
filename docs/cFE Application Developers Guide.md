@@ -395,7 +395,7 @@ Module descriptions are provided in the table below.
 ```
 -- missionxyz/apps
    |-- ci_lab
-   |-- sample_app
+   |-- blinker_app
    |-- sch_lab
    |-- to_lab
 ```
@@ -603,7 +603,7 @@ applications.
 ### 4.2.1 cFS Application Template
 
 Applications designed to interface with the cFE should follow standard templates.
-Reference sample_app on Github for “live” example.
+Reference blinker_app on Github for “live” example.
 
 __File Organization and Directory Structure__
 
@@ -690,32 +690,32 @@ recommended to only override/modify the more granular headers defined above.
 the `platform_cfg.h` may depend on items defined in `mission_cfg.h`, but items in `mission_cfg.h` must **not** depend on items
 defined in `platform_cfg.h`.
 
-__Example for SAMPLE_APP__
+__Example for BLINKER_APP__
 
-The sample application (SAMPLE_APP) provides a concrete example of the currently-recommended patterns for CFE/CFS applications.
+The sample application (BLINKER_APP) provides a concrete example of the currently-recommended patterns for CFE/CFS applications.
 This section provides a summary the naming conventions put into practice for the sample application.
 
 | **Files**                                   | **Description**                                                                                   |
 |:--------------------------------------------|:--------------------------------------------------------------------------------------------------|
-| `config/default_sample_app_msgids.h`        | CFE Software Bus Message ID definitions for SAMPLE_APP (CMD, SEND_HK, and HK_TLM)                 |
-| `config/default_sample_app_msgdefs.h`       | Not needed                                                                                        |
-| `config/default_sample_app_tbldefs.h`       | Not needed                                                                                        |
-| `config/default_sample_app_msgstruct.h`     | Defines NoopCmd, ResetCountersCmd, ProcessCmd, and HkTlm message structures                       |
-| `config/default_sample_app_tblstruct.h`     | Defines the example table content structure                                                       |
-| `config/default_sample_app_interface_cfg.h` | Not needed                                                                                        |
-| `config/default_sample_app_global_cfg.h`    | Not needed                                                                                        |
-| `config/default_sample_app_internal_cfg.h`  | Not needed                                                                                        |
-| `eds/sample_app.xml`                        | EDS `<PackageFile>` for the SAMPLE_APP component (supercedes headers above, if enabled)           |
-| `fsw/inc/sample_app_events.h`               | Defines sample_app event IDs                                                                      |
-| `fsw/inc/sample_app_perfids.h`              | Define sample_app performance IDs                                                                 |
-| `fsw/src/sample_app.c`                      | Application entry point, initialization, and main task loop                                       |
-| `fsw/inc/sample_app.h`                      | Declarations/Prototypes for `sample_app.c` that are needed by other source units                  |
-| `fsw/src/sample_app_cmds.c`                 | Application command processor functions                                                           |
-| `fsw/inc/sample_app_cmds.h`                 | Declarations/Prototypes for `sample_app_cmds.c` that are needed by other source units             |
-| `fsw/src/sample_app_dispatch.c`             | Application command dispatcher ("TaskPipe"; identification and validation of all message inputs)  |
-| `fsw/inc/sample_app_dispatch.h`             | Declarations/Prototypes for `sample_app_dispatch.c` that are needed by other source units         |
+| `config/default_blinker_app_msgids.h`        | CFE Software Bus Message ID definitions for BLINKER_APP (CMD, SEND_HK, and HK_TLM)                 |
+| `config/default_blinker_app_msgdefs.h`       | Not needed                                                                                        |
+| `config/default_blinker_app_tbldefs.h`       | Not needed                                                                                        |
+| `config/default_blinker_app_msgstruct.h`     | Defines NoopCmd, ResetCountersCmd, ProcessCmd, and HkTlm message structures                       |
+| `config/default_blinker_app_tblstruct.h`     | Defines the example table content structure                                                       |
+| `config/default_blinker_app_interface_cfg.h` | Not needed                                                                                        |
+| `config/default_blinker_app_global_cfg.h`    | Not needed                                                                                        |
+| `config/default_blinker_app_internal_cfg.h`  | Not needed                                                                                        |
+| `eds/blinker_app.xml`                        | EDS `<PackageFile>` for the BLINKER_APP component (supercedes headers above, if enabled)           |
+| `fsw/inc/blinker_app_events.h`               | Defines blinker_app event IDs                                                                      |
+| `fsw/inc/blinker_app_perfids.h`              | Define blinker_app performance IDs                                                                 |
+| `fsw/src/blinker_app.c`                      | Application entry point, initialization, and main task loop                                       |
+| `fsw/inc/blinker_app.h`                      | Declarations/Prototypes for `blinker_app.c` that are needed by other source units                  |
+| `fsw/src/blinker_app_cmds.c`                 | Application command processor functions                                                           |
+| `fsw/inc/blinker_app_cmds.h`                 | Declarations/Prototypes for `blinker_app_cmds.c` that are needed by other source units             |
+| `fsw/src/blinker_app_dispatch.c`             | Application command dispatcher ("TaskPipe"; identification and validation of all message inputs)  |
+| `fsw/inc/blinker_app_dispatch.h`             | Declarations/Prototypes for `blinker_app_dispatch.c` that are needed by other source units         |
 
-In addition to showing the standard structure of a cFS application, the sample_app also demonstrates how to interface with cFS libraries
+In addition to showing the standard structure of a cFS application, the blinker_app also demonstrates how to interface with cFS libraries
 and table services.
 
 ### 4.2.2 Avoid "Endian-ness" Dependencies
@@ -1712,7 +1712,7 @@ performs this request by calling the `CFE_SB_CreatePipe` API. The
 following is a brief example of how this is accomplished:
 
 ```c
-FILE: sample_app.h
+FILE: blinker_app.h
 
 ...
 /* Define Input Pipe Characteristics */
@@ -1729,7 +1729,7 @@ typedef struct
 ```
 
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 SAMPLE_AppData_t;  SAMPLE_AppData;
 ...
@@ -1772,7 +1772,7 @@ calling the `CFE_SB_DeletePipe` API. This API is demonstrated as
 follows:
 
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 {
    int32 Status;
@@ -1808,7 +1808,7 @@ FILE: sample_msgids.h
 ...
 ```
 ```c
-FILE: sample_app.h
+FILE: blinker_app.h
 
 ...
 /* Define Receive Message ID Characteristics */
@@ -1824,7 +1824,7 @@ typedef struct
 
 ```
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 SAMPLE_AppData_t SAMPLE_AppData;
 
@@ -1909,7 +1909,7 @@ FILE: sample_msgids.h
 ```
 
 ```c
-FILE: sample_app.h
+FILE: blinker_app.h
 
 /*
 ** Type definition (SAMPLE task housekeeping)...
@@ -1940,7 +1940,7 @@ typedef struct
 } SAMPLE_AppData_t;
 ```
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 SAMPLE_AppData_t  SAMPLE_AppData;  /* Instantiate Task Data */
 
@@ -2091,7 +2091,7 @@ have been set to the appropriate values, the application can then
 send the message on the SB. An example of this is shown below:
 
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 SAMPLE_AppData_t  SAMPLE_AppData;  /* Instantiate Task Data */
 
@@ -2101,14 +2101,14 @@ SAMPLE_AppData_t  SAMPLE_AppData;  /* Instantiate Task Data */
     /*
     ** Get command execution counters...
     */
-    SAMPLE_APP_Data.HkTlm.Payload.CommandErrorCounter = SAMPLE_APP_Data.ErrCounter;
-    SAMPLE_APP_Data.HkTlm.Payload.CommandCounter      = SAMPLE_APP_Data.CmdCounter;
+    BLINKER_APP_Data.HkTlm.Payload.CommandErrorCounter = BLINKER_APP_Data.ErrCounter;
+    BLINKER_APP_Data.HkTlm.Payload.CommandCounter      = BLINKER_APP_Data.CmdCounter;
 
     /*
     ** Send housekeeping telemetry packet...
     */
-    CFE_SB_TimeStampMsg(CFE_MSG_PTR(SAMPLE_APP_Data.HkTlm.TelemetryHeader));
-    CFE_SB_TransmitMsg(CFE_MSG_PTR(SAMPLE_APP_Data.HkTlm.TelemetryHeader), true);
+    CFE_SB_TimeStampMsg(CFE_MSG_PTR(BLINKER_APP_Data.HkTlm.TelemetryHeader));
+    CFE_SB_TransmitMsg(CFE_MSG_PTR(BLINKER_APP_Data.HkTlm.TelemetryHeader), true);
    ...
 }
 ```
@@ -2120,7 +2120,7 @@ applications are message-driven, this typically occurs in an application's
 main execution loop.  An example of this is shown below.
 
 ```c
-FILE: sample_app.h
+FILE: blinker_app.h
 
 typedef struct
 {
@@ -2130,7 +2130,7 @@ typedef struct
 } SAMPLE_AppData_t;
 ```
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 {
    ...
@@ -2212,7 +2212,7 @@ FILE: app_msgids.h
 #define SAMPLE_BIG_TLM_MID        (0x0231)   /* Define Message ID for SAMPLE’s Big Pkt */
 ...
 
-FILE: sample_app.h
+FILE: blinker_app.h
 
 ...
 #define SAMPLE_BIGPKT_DATALEN     (32768)   /* Define Data Length for SAMPLE’s Big Pkt */
@@ -2244,7 +2244,7 @@ typedef struct
   ...
 } SAMPLE_AppData_t;
 
-FILE: sample_app.c
+FILE: blinker_app.c
 
 SAMPLE_AppData_t  SAMPLE_AppData;  /* Instantiate Task Data */
 ...
@@ -2440,7 +2440,7 @@ An example of an Application registering with Event Services and
 specifying its binary filters is shown below:
 
 ```c
-FILE: sample_app.h
+FILE: blinker_app.h
 
 ...
 /*
@@ -2467,7 +2467,7 @@ typedef struct
 } SAMPLE_AppData_t;
 
 
-FILE: sample_app.c
+FILE: blinker_app.c
 
 SAMPLE_AppData_t  SAMPLE_AppData;  /* Instantiate Task Data */
 
@@ -2513,7 +2513,7 @@ resets all event filter counters for the Application. An example of
 resetting a specific Event ID filter counter is shown below:
 
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 {
    int32 Status;
@@ -2919,7 +2919,7 @@ and wishes to use a different parameter set. An example of this can be
 seen below:
 
 ```c
-FILE: sample_app.c
+FILE: blinker_app.c
 
 CFE_TBL_Handle_t  MyTableHandle  /* Handle to MyTable */
 
