@@ -98,7 +98,7 @@
 **       This parameter has a lower limit of 4 and an upper limit of 65535.
 **
 */
-#define CFE_PLATFORM_SB_DEFAULT_MSG_LIMIT 4
+#define CFE_PLATFORM_SB_DEFAULT_MSG_LIMIT 1000
 
 /**
 **  \cfesbcfg Size of the SB buffer memory pool
